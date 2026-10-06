@@ -1,0 +1,9 @@
+name: pathogen-detection
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python>=3.10
+  - bwa
+  - minimap2
+  - ncbi-datasets-cli

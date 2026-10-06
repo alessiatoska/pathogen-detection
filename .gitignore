@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.pyc
+pathogen_detection_out/
+*.sam
+*.zip
+*.fna
+*.fasta
+*.fastq
+*.fastq.gz
+*.amb
+*.ann
+*.bwt
+*.pac
+*.sa
+*.mmi
+*.fasta.gz
