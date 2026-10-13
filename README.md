@@ -1,14 +1,14 @@
 # pathogen-detection
 
-Estimate which taxa of a microbe are present in a sequencing sample, using the host genome as a decoy so host reads are not mis-assigned to the microbe. Pure standard-library Python; it needs NCBI's [`datasets`](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/download-and-install/) CLI plus `bwa` (Illumina reads) or `minimap2` (Nanopore reads).
+Estimate which taxa of a microbe are present in a sequencing sample
 
 ## Workflow
 
-1. Picks the best assembly (highest contig N50) per tax ID for the microbe, plus one host genome, from NCBI, or uses assemblies you pin by accession.
-2. Downloads them, builds one gzipped reference and indexes it for the aligner. Indexes are reused while the set of genomes stays the same.
+1. Pick the best assembly (highest contig N50) per tax ID for the microbe, plus one host genome, from NCBI, or uses assemblies you pin by accession.
+2. Download them, builds one gzipped reference and indexes it for the aligner.
 3. Maps the reads with `bwa mem` (single- or paired-end), or with `minimap2` for Nanopore reads (`--ont`), filtering alignments as they stream instead of writing a SAM.
-4. Counts each read for the genome it fits best (MAPQ ≥ 30, adjustable). Reads that fit several genomes equally well are shared between them in proportion to each genome's own reads (EM) instead of being thrown away.
-5. Reports alignments and relative abundance for every genome, with the host left out of the microbe percentages, and why the other reads were not assigned.
+4. Counts each read for the genome it fits best (MAPQ ≥ 30, adjustable). Reads that fit several genomes equally well are shared between them in proportion to each genome's own reads (EM).
+5. Report alignments and relative abundance for every genome
 
 ## Install
 
@@ -61,6 +61,6 @@ Abundance columns: `tax_id`, `name`, `strain`, `role` (microbe or host), `access
 
 Re-running in the same output directory reuses the downloads, and the index too if the genomes are unchanged. Mapping needs only the index, so `genomes/` and `reference.fasta.gz` can be deleted to save space.
 
-## License
+## Acknowledgments
 
-MIT
+This project originated as coursework for Bioinformatics in Plant Pathology (2024) at Sapienza University of Rome, and extended here.
